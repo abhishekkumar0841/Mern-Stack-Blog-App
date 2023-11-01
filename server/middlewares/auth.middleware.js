@@ -12,7 +12,9 @@ const authMiddleware = async (req, res, next)=>{
 
     try {
         const userDetails = await jwt.decode(token, process.env.JWT_SECRET)
+        console.log('USER DETAILS-->', userDetails)
         req.user = userDetails
+
         next()
     } catch (error) {
         console.log(error)
