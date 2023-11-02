@@ -203,7 +203,11 @@ const userBlog = async (req, res) => {
 
 const allBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find();
+    // const blogs = await Blog.find({}).populate('postedBy').exec();
+    const blogs = await Blog.find({}).populate({
+      path: 'postedBy',
+      select: 'firstName lastName',
+    });
     console.log("Blogs are-->", blogs);
 
     return res.status(200).json({
