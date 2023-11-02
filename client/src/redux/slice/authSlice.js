@@ -21,7 +21,9 @@ export const authSlice = createSlice({
       state.isLoggedIn = false;
       state.userData = null;
 
-      localStorage.clear();      
+      //i handle these specific because of dark mode;😂
+      localStorage.removeItem('isLoggedIn')      
+      localStorage.removeItem('userData')      
     },
   },
 });
