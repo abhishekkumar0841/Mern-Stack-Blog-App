@@ -26,13 +26,13 @@ const userSchema = new mongoose.Schema(
       trim: true,
       maxLength: [20, "User name must be less than 20 characters"],
       minLength: [2, "user name must be greater than 2 characters"],
-      unique: [true, 'This user name is already registered'],
+      unique: [true, "This user name is already registered"],
     },
     email: {
       type: String,
       required: [true, "email is required"],
       trim: true,
-      unique: [true, 'This email is already registered'],
+      unique: [true, "This email is already registered"],
     },
     password: {
       type: String,
@@ -40,13 +40,13 @@ const userSchema = new mongoose.Schema(
       trim: true,
       select: false,
     },
-    avatar:{
-      secure_url:{
+    avatar: {
+      secure_url: {
         type: String,
       },
-      public_url:{
+      public_url: {
         type: String,
-      }
+      },
     },
     role: {
       type: String,
@@ -57,6 +57,18 @@ const userSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Blog",
+      },
+    ],
+    likedBlogs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Like",
+      },
+    ],
+    commentedBlogs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
       },
     ],
   },
@@ -80,9 +92,9 @@ userSchema.methods = {
     );
   },
 
-  comparePassword: async function(stringPassword){
-    return await bcrypt.compare(stringPassword, this.password)
-  }
+  comparePassword: async function (stringPassword) {
+    return await bcrypt.compare(stringPassword, this.password);
+  },
 };
 
 userSchema.pre("save", async function (next) {
