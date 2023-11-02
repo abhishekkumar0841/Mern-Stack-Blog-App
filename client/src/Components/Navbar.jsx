@@ -4,6 +4,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BiSun, BiMoon } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../redux/slice/themeSlice";
+import axiosInstance from "../Helper/axiosInstance";
+import { logout } from "../redux/slice/authSlice";
 
 const Navbar = () => {
   const { theme } = useSelector((state) => state.theme);
@@ -13,6 +15,15 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleLogout = async()=>{
+    const res = await axiosInstance.get('/user/logout')
+    console.log("RES OF LOGOUT->",res)
+    if(res?.data?.success){
+      dispatch(logout())
+      navigate('/')
+    }
+  }
 
   useEffect(() => {
     if (theme) {
@@ -26,7 +37,7 @@ const Navbar = () => {
     <div className=" w-full h-[10vh] flex items-center justify-between bg-gray-300 dark:bg-indigo-950 transition-all duration-300 ease-in-out text-gray-900 dark:text-white px-10 py-4">
       {/* logo */}
       <div className="flex items-center">
-        <Link className="flex items-center gap-2">
+        <Link to={'/'} className="flex items-center gap-2">
           <img
             src={blogLogo}
             alt=""
@@ -89,14 +100,14 @@ const Navbar = () => {
           )}
         </div>
 
-        {isLoggedIn ? (
+        {!isLoggedIn ? (
           <div className=" text-xl font-bold flex items-center gap-4">
             <NavLink to={"/login"} className='active:text-yellow-500 hover:text-yellow-500 transition-all duration-300 ease-in-out '>Login</NavLink>
             <NavLink to={"/signup"}  className='active:text-yellow-500 hover:text-yellow-500 transition-all duration-300 ease-in-out '>Sign up</NavLink>
           </div>
         ) : (
           <div className=" text-xl font-bold flex items-center gap-4">
-            <NavLink to={"/"}  className='active:text-yellow-500 hover:text-yellow-500 transition-all duration-300 ease-in-out '>Logout</NavLink>
+            <NavLink to={"/"} onClick={handleLogout}  className='active:text-yellow-500 hover:text-yellow-500 transition-all duration-300 ease-in-out '>Logout</NavLink>
             <NavLink to={"/dashboard"} >
               <img src={blogLogo} alt="" width={50} />
             </NavLink>
