@@ -34,7 +34,7 @@ const Navbar = () => {
   }, [theme]);
 
   return (
-    <div className=" w-full h-[10vh] sticky top-0 flex items-center justify-between bg-gray-300 dark:bg-indigo-950 transition-all duration-300 ease-in-out text-gray-900 dark:text-white px-10 py-4">
+    <div className=" w-full h-[10vh] sticky top-0 flex items-center justify-between bg-gray-300 dark:bg-indigo-950 transition-all duration-300 ease-in-out text-gray-900 dark:text-white px-10 py-4 z-50">
       {/* logo */}
       <div className="flex items-center">
         <Link to={'/'} className="flex items-center gap-2">
