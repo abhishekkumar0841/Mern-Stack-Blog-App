@@ -1,14 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import BlogCardFooter from "./BlogCardFooter";
+import { useNavigate } from "react-router-dom";
+import {BsFillArrowLeftCircleFill} from 'react-icons/bs'
 
 const BlogTemplate = () => {
   const { blogById } = useSelector((state) => state.blog);
   console.log("BLOG BY ID-->", blogById);
 
+  const navigate = useNavigate()
+
   return (
     <div className=" min-h-[80vh] flex items-center justify-center ">
       <div className="w-full max-w-[800px] mx-auto py-6 dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out shadow-[0_0_10px_gray] my-10 ">
+        
         <div className=" relative px-5 py-3">
+        <div onClick={()=>navigate(-1)}>
+            <BsFillArrowLeftCircleFill className=" text-4xl cursor-pointer"/>
+        </div>
           <div className=" text-center">
             <h1 className=" text-3xl font-bold capitalize  w-1/2 mx-auto">
               {blogById?.title}
@@ -31,9 +40,12 @@ const BlogTemplate = () => {
         </div>
         {/* description & content section */}
         <div className=" px-5 py-3 text-center space-y-4 text-xl">
-          <p className="font-bold">{blogById.description}</p>
-          <p>{blogById.blogContent}</p>
+          <p className="font-bold">{blogById?.description}</p>
+          <p>{blogById?.blogContent}</p>
         </div>
+
+        {/* Blog card footer */}
+        <BlogCardFooter />
       </div>
     </div>
   );
