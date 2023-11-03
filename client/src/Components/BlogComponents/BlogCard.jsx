@@ -2,13 +2,18 @@ import React from "react";
 import blogLogo from "../../assets/images/blogLogo.png";
 import { useNavigate } from "react-router-dom";
 import { BiSolidComment, BiSolidLike } from "react-icons/bi";
+import { useDispatch } from "react-redux";
 
 const BlogCard = ({ blog }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const handleCardClick = ()=>{
+    navigate(`/blogs/${blog._id}`)
+  }
   return (
     <div
       className="dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out shadow-[0_0_10px_gray] w-[400px] h-[400px] overflow-hidden rounded-md py-6 px-4 flex flex-col items-center gap-6 hover:scale-105 cursor-pointer"
-      onClick={() => navigate(`/blogs`)}
+      onClick={handleCardClick}
     >
       <div>
         <h1 className=" text-center text-2xl font-bold">{blog.title}</h1>
