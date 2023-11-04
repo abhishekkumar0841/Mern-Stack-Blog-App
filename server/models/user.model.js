@@ -53,22 +53,10 @@ const userSchema = new mongoose.Schema(
       enum: ["USER", "ADMIN"],
       default: "USER",
     },
-    postedBlog: [
+    blog: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Blog",
-      },
-    ],
-    likedBlogs: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Like",
-      },
-    ],
-    commentedBlogs: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment",
       },
     ],
   },

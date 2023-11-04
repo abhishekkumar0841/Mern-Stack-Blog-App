@@ -1,8 +1,8 @@
 import express from 'express'
 import { allBlogs, createBlog, deleteBlog, getBlogById, updateBlog, userBlog } from '../controllers/blog.controller.js'
 import authMiddleware from '../middlewares/auth.middleware.js'
-import { createComment } from '../controllers/comment.controller.js'
-import { disLike, like } from '../controllers/like.controller.js'
+import { allComments, createComment } from '../controllers/comment.controller.js'
+import {  allLikedUsers, checkUserLikeOnBlog, like, removeLike } from '../controllers/like.controller.js'
 
 const blogRoutes = express.Router()
 
@@ -15,9 +15,12 @@ blogRoutes.delete('/:id',authMiddleware, deleteBlog)
 
 // *****COMMENT ROUTES*******
 blogRoutes.post('/comment/:id', authMiddleware, createComment)
+blogRoutes.get('/comment/:id', authMiddleware, allComments)
 
 //*******LIKE ROUTES******** */
 blogRoutes.post('/like/:id', authMiddleware, like)
-blogRoutes.delete('/dislike/:id', authMiddleware, disLike)
+blogRoutes.get('/like/:id', allLikedUsers)
+blogRoutes.delete('/like/:id', authMiddleware, removeLike)
+blogRoutes.get('/like/user/:id', authMiddleware, checkUserLikeOnBlog)
 
 export default blogRoutes

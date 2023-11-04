@@ -24,26 +24,28 @@ const createBlog = async (req, res) => {
       title,
       description,
       blogContent,
-      postedBy: userId,
+      author: userId,
     });
 
     const savedBlog = await blog.save();
 
+    await savedBlog.populate("author");
+
     const addBlogInUserModel = await User.findByIdAndUpdate(
       userId,
-      { $push: { postedBlog: savedBlog._id } },
+      { $push: { blog: savedBlog._id } },
       { new: true }
     )
-      .populate("postedBlog")
+      .populate("blog")
       .exec();
 
     return res.status(200).json({
       success: true,
       message: "Blog posted successfully",
-      // savedBlog,
-      addBlogInUserModel,
+      savedBlog,
     });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       success: false,
       message: error.message,
@@ -53,30 +55,30 @@ const createBlog = async (req, res) => {
 
 const updateBlog = async (req, res) => {
   const blogId = req.params.id;
-  const userId = req.user.id;
-
-  if (!userId) {
-    return res.status(404).json({
-      success: false,
-      message: "This user does not exists",
-    });
-  }
-  const { title, description, blogContent } = req.body;
   if (!blogId) {
     return res.status(404).json({
       success: false,
-      message: "This blog does not exists",
+      message: "Blog id does not exists",
     });
   }
 
+  const userId = req.user.id;
+  if (!userId) {
+    return res.status(404).json({
+      success: false,
+      message: "User id is not exists",
+    });
+  }
+  const { title, description, blogContent } = req.body;
+  
   const blog = await Blog.findById(blogId);
 
   //compare userId to postedBy properties of blog model
-  const postedById = blog.postedBy.toString();
-  console.log("CHECK BLOG POSTED BY-->", postedById);
+  const authorId = blog.author.toString();
+  console.log("CHECK BLOG POSTED BY-->", authorId);
 
   //only allow to update blog to that user who posted this blog
-  if (postedById !== userId) {
+  if (authorId !== userId) {
     return res.status(404).json({
       success: false,
       message: "You cannot update this blog!",
@@ -138,12 +140,12 @@ const deleteBlog = async (req, res) => {
       });
     }
 
-    //compare userId to postedBy properties of blog model
-    const postedById = blog?.postedBy?.toString();
-    console.log("CHECK BLOG POSTED BY-->", postedById);
+    //compare userId to author properties of blog model
+    const authorId = blog?.author?.toString();
+    console.log("CHECK BLOG POSTED BY-->", authorId);
 
     //only allow to update blog to that user who posted this blog
-    if (postedById !== userId) {
+    if (authorId !== userId) {
       return res.status(404).json({
         success: false,
         message: "You cannot delete this blog!",
@@ -154,7 +156,7 @@ const deleteBlog = async (req, res) => {
 
     const updateInUser = await User.findByIdAndUpdate(
       userId,
-      { $pull: { postedBlog: deletedBlog._id } },
+      { $pull: { blog: deletedBlog._id } },
       { new: true }
     );
 
@@ -182,10 +184,10 @@ const userBlog = async (req, res) => {
       });
     }
 
-    const user = await User.findById(userId).populate("postedBlog").exec();
+    const user = await User.findById(userId).populate("blog").exec();
     console.log("USER SPECIFIC BLOGS-->", user);
 
-    if (!user || !user.postedBlog || user.postedBlog.length === 0) {
+    if (!user || !user.blog || user.blog.length === 0) {
       return res.status(404).json({
         success: false,
         message: "Blogs are not available",
@@ -195,7 +197,7 @@ const userBlog = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Your blog fetched successfully",
-      userBlogs: user.postedBlog,
+      userBlogs: user.blog,
     });
   } catch (error) {
     return res.status(500).json({
@@ -209,10 +211,10 @@ const allBlogs = async (req, res) => {
   try {
     // const blogs = await Blog.find({}).populate('postedBy').exec();
     const blogs = await Blog.find({}).populate({
-      path: "postedBy",
+      path: "author",
       select: "firstName lastName",
-    });
-    console.log("Blogs are-->", blogs);
+    }).exec();
+    // console.log("Blogs are-->", blogs);
 
     return res.status(200).json({
       success: true,
@@ -237,8 +239,8 @@ const getBlogById = async (req, res) => {
   }
   try {
     const blog = await Blog.findById(blogId).populate({
-      path: "postedBy",
-    });
+      path: "author",
+    }).exec();
     if (!blog) {
       return res.status(404).json({
         success: false,
@@ -248,7 +250,7 @@ const getBlogById = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "Blog fetch successfully",
+      message: "Blog fetched successfully",
       blog,
     });
   } catch (error) {
