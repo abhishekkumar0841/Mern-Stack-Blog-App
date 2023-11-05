@@ -33,7 +33,13 @@ const createComment = async (req, res) => {
 
     const savedComment = await comment.save()
 
-    const blog = await Blog.findByIdAndUpdate(blogId, {$push: {comments: savedComment._id}}, {new:true}).populate('comments').exec()
+    const blog = await Blog.findByIdAndUpdate(blogId, {$push: {comments: savedComment._id}}, {new:true}).populate({
+      path: 'comments',
+      populate: {
+        path: 'author',
+        select: 'firstName lastName'
+      }
+    }).exec()
 
     return res.status(200).json({
         success: true,
@@ -60,7 +66,14 @@ const allComments = async (req, res)=>{
       });
     }
     
-    const blog = await Blog.findById(blogId).populate('comments').exec()
+    // const blog = await Blog.findById(blogId).populate('comments').exec()
+    const blog = await Blog.findById(blogId).populate({
+      path: 'comments',
+      populate:{
+        path: 'author',
+        select: 'firstName lastName'
+      }
+    }).exec()
 
     if(!blog){
         return res.status(404).json({
@@ -71,7 +84,8 @@ const allComments = async (req, res)=>{
 
       return res.status(200).json({
         success: true,
-        message: "All blogs comments are populated successfully",
+        message: "Fetched all blogs comments successfully",
+        blog
       });
 
   } catch (error) {
