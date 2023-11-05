@@ -3,13 +3,13 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import NotFoundPage from "./Pages/NotFoundPage";
 import Contact from "./Pages/Contact";
-import MyBlog from "./Pages/MyBlog";
 import About from "./Pages/About";
 import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
 import BlogHomePage from "./Pages/BlogPages/BlogHomePage";
 import BlogPage from "./Pages/BlogPages/BlogPage";
 import PostBlogPage from "./Pages/BlogPages/PostBlogPage";
+import MyBlogPage from "./Pages/BlogPages/MyBlogPage";
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
       <Route path="/blogs" element={<BlogHomePage/>} />
       <Route path="/postblog" element={<PostBlogPage/>} />
       <Route path="/blogs/:id" element={<BlogPage/>} />
-      <Route path="/myblogs" element={<MyBlog />} />
+      <Route path="/myblogs" element={<MyBlogPage />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<About />} />
 
