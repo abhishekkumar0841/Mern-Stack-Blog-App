@@ -26,7 +26,7 @@ const BlogTemplate = () => {
               . . By . .
             </p>
             <p className=" uppercase text-xl font-semibold">
-              {blogById?.postedBy?.firstName} {blogById?.postedBy?.lastName}
+              {blogById?.author?.firstName} {blogById?.author?.lastName}
             </p>
           </div>
           <div className=" absolute right-5 top-4 ">

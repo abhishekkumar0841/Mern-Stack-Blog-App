@@ -16,9 +16,9 @@ const BlogCard = ({ blog }) => {
       onClick={handleCardClick}
     >
       <div>
-        <h1 className=" text-center text-2xl font-bold">{blog.title}</h1>
+        <h1 className=" text-center text-2xl font-bold">{blog?.title}</h1>
         <h2 className=" text-center text-xl font-semibold">
-          {blog.description}
+          {blog?.description}
         </h2>
       </div>
       <div>
@@ -33,19 +33,19 @@ const BlogCard = ({ blog }) => {
           <p className=" flex items-center gap-3 text-xl font-semibold">
             Total
             <BiSolidLike />
-            {blog.likes.length}
+            {blog?.likes?.length}
           </p>
           <p className=" flex items-center gap-3 text-xl font-semibold">
             Total
             <BiSolidComment />
-            {blog.likes.length}
+            {blog?.comments?.length}
           </p>
         </div>
         <div className=" text-center">
           <p className=" capitalize font-semibold text-xl">
             Author:{" "}
             <span className=" underline">
-              {blog.postedBy.firstName} {blog.postedBy.lastName}
+              {blog?.author?.firstName} {blog?.author?.lastName}
             </span>
           </p>
         </div>
