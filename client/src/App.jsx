@@ -10,6 +10,7 @@ import BlogHomePage from "./Pages/BlogPages/BlogHomePage";
 import BlogPage from "./Pages/BlogPages/BlogPage";
 import PostBlogPage from "./Pages/BlogPages/PostBlogPage";
 import MyBlogPage from "./Pages/BlogPages/MyBlogPage";
+import CommentPage from "./Pages/CommentPage/CommentPage";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <Route path="/postblog" element={<PostBlogPage/>} />
       <Route path="/blogs/:id" element={<BlogPage/>} />
       <Route path="/myblogs" element={<MyBlogPage />} />
+      <Route path="/:id/comments" element={<CommentPage />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<About />} />
 

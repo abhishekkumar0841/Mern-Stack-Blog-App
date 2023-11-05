@@ -92,7 +92,7 @@ const BlogCardFooter = () => {
         <p>Created At: {new Date(getBlogById?.createdAt)?.toString()}</p>
       </div> */}
 
-      <Link to={'/comments'} className=" flex justify-end gap-5 items-center  cursor-pointer group">
+      <Link to={`/${id}/comments`} className=" flex justify-end gap-5 items-center  cursor-pointer group">
         <BiCommentAdd className="text-3xl group-hover:scale-125 transition-all duration-300 ease-in-out" />{" "}
         <span className=" font-semibold text-xl">
            {blogById?.comments?.length} Comment</span>
