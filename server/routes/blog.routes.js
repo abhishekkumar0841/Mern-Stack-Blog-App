@@ -8,8 +8,11 @@ const blogRoutes = express.Router()
 
 blogRoutes.post('/post', authMiddleware, createBlog)
 blogRoutes.get('/', allBlogs)
+
+//here i initially use this route -->  blogRoutes.get('/:id', getBlogById) route before this route --> blogRoutes.get('/myblog', authMiddleware, userBlog)... so i get error because express reads routes from top to bottom
+blogRoutes.get('/myblog', authMiddleware, userBlog)
 blogRoutes.get('/:id', getBlogById)
-blogRoutes.get('/user', authMiddleware, userBlog)
+
 blogRoutes.put('/:id',authMiddleware, updateBlog)
 blogRoutes.delete('/:id',authMiddleware, deleteBlog)
 
