@@ -11,7 +11,7 @@ const Navbar = () => {
   const { theme } = useSelector((state) => state.theme);
   const { isLoggedIn, userData } = useSelector((state) => state.auth);
   //   console.log("THEME IS-->", theme);
-  console.log("IS LOGGED IN-->", isLoggedIn);
+  // console.log("IS LOGGED IN-->", isLoggedIn);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to={"/"}
-            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out active:text-yellow-500"
+            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
           >
             Home
           </NavLink>
@@ -61,7 +61,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to={"/blogs"}
-            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out active:text-yellow-500"
+            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
           >
             Blogs
           </NavLink>
@@ -69,7 +69,7 @@ const Navbar = () => {
         {isLoggedIn && <li>
           <NavLink
             to={"/myblogs"}
-            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out active:text-yellow-500"
+            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
           >
             My Blogs
           </NavLink>
@@ -77,7 +77,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to={"/contact"}
-            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out active:text-yellow-500"
+            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
           >
             Contact Us
           </NavLink>
@@ -85,7 +85,7 @@ const Navbar = () => {
         <li>
           <NavLink
             to={"/about"}
-            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out active:text-yellow-500"
+            className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
           >
             About Us
           </NavLink>
@@ -110,12 +110,12 @@ const Navbar = () => {
 
         {!isLoggedIn ? (
           <div className=" text-xl font-bold flex items-center gap-4">
-            <NavLink to={"/login"} className='active:text-yellow-500 hover:text-yellow-500 transition-all duration-300 ease-in-out '>Login</NavLink>
-            <NavLink to={"/signup"}  className='active:text-yellow-500 hover:text-yellow-500 transition-all duration-300 ease-in-out '>Sign up</NavLink>
+            <NavLink to={"/login"} className=' hover:text-yellow-500 transition-all duration-300 ease-in-out '>Login</NavLink>
+            <NavLink to={"/signup"}  className=' hover:text-yellow-500 transition-all duration-300 ease-in-out '>Sign up</NavLink>
           </div>
         ) : (
           <div className=" text-xl font-bold flex items-center gap-4">
-            <NavLink to={"/"} onClick={handleLogout}  className='active:text-yellow-500 hover:text-yellow-500 transition-all duration-300 ease-in-out '>Logout</NavLink>
+            <NavLink to={"/login"} onClick={handleLogout}  className=' hover:text-yellow-500 transition-all duration-300 ease-in-out '>Logout</NavLink>
             <NavLink to={"/profile"} >
               <img src={userData?.avatar?.secure_url} alt="User" width={50} className=" rounded-full" />
             </NavLink>
