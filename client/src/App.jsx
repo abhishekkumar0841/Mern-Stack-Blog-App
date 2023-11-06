@@ -12,6 +12,7 @@ import PostBlogPage from "./Pages/BlogPages/PostBlogPage";
 import MyBlogPage from "./Pages/BlogPages/MyBlogPage";
 import CommentPage from "./Pages/CommentPage/CommentPage";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
+import EditBlogPage from "./Pages/BlogPages/EditBlogPage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Route path="/postblog" element={<PostBlogPage/>} />
       <Route path="/blogs/:id" element={<BlogPage/>} />
       <Route path="/myblogs" element={<MyBlogPage />} />
+      <Route path="/editblog/:id" element={<EditBlogPage />} />
       <Route path="/:id/comments" element={<CommentPage />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/about" element={<About />} />
