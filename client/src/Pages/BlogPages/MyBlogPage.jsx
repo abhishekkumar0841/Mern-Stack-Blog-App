@@ -6,6 +6,7 @@ import axiosInstance from "../../Helper/axiosInstance";
 import toast from "react-hot-toast";
 import { setMyBlog } from "../../redux/slice/blogSlice";
 import { setLoading } from "../../redux/slice/loadingSlice";
+import { useNavigate } from "react-router-dom";
 
 const MyBlogPage = () => {
 
@@ -14,6 +15,7 @@ const MyBlogPage = () => {
     const {loading} = useSelector(state => state.loader)
     console.log('LOADING:', loading)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(()=>{
         (async()=>{
@@ -44,8 +46,9 @@ const MyBlogPage = () => {
                 </div>
             ) : (
                 myBlog.length < 1  ? (
-                    <div>
+                    <div className=" flex flex-col items-center justify-center">
                         <h1  className=" text-4xl text-white font-bold tracking-widest">Sorry, you have not posted any blog yet!</h1>
+                        <button onClick={()=> navigate(-1)} className="bg-yellow-600 hover:bg-yellow-500 transition-all duration-300 ease-in-out w-fit px-4 rounded-md mt-4 py-1 font-bold text-xl">Go Back</button>
                     </div>
                 ): (
                     myBlog.map((blog)=>(

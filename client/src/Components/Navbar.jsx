@@ -116,7 +116,7 @@ const Navbar = () => {
         ) : (
           <div className=" text-xl font-bold flex items-center gap-4">
             <NavLink to={"/"} onClick={handleLogout}  className='active:text-yellow-500 hover:text-yellow-500 transition-all duration-300 ease-in-out '>Logout</NavLink>
-            <NavLink to={"/dashboard"} >
+            <NavLink to={"/profile"} >
               <img src={userData?.avatar?.secure_url} alt="User" width={50} className=" rounded-full" />
             </NavLink>
           </div>
