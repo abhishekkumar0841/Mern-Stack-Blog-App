@@ -6,6 +6,7 @@ import userRoutes from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
 import blogRoutes from "./routes/blog.routes.js";
 import cors from "cors";
+import otherRoutes from "./routes/others.routes.js";
 
 dotenv.config();
 const app = express();
@@ -28,6 +29,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/blog", blogRoutes);
+app.use('/api/v1/others', otherRoutes)
 
 app.all("*", (req, res) => {
   return res.status(404).json({
