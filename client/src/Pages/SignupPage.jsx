@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import HomeLayout from "../Layout/HomeLayout";
 import axiosInstance from '../Helper/axiosInstance'
 import {toast} from 'react-hot-toast'
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signup } from "../redux/slice/authSlice";
 
 const SignupPage = () => {
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const [input, setInput] = useState({
     firstName: '',
     lastName: '',
@@ -27,7 +34,7 @@ const SignupPage = () => {
         const response = await axiosInstance.post('/user/signup', input)
         console.log('RESPONSE OF SIGNUP->', response)
         if(response?.data?.success){
-            toast.success(response?.data?.message)
+            toast.success('Registration successful')
             setInput({
                 firstName: '',
                 lastName: '',
@@ -35,6 +42,8 @@ const SignupPage = () => {
                 email: "",
                 password: "",
             })
+            navigate('/login')
+            dispatch(signup(input))
         }
     } catch (error) {
         console.log(error)

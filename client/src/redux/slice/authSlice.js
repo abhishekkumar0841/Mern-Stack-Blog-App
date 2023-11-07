@@ -3,13 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
   userData: JSON.parse(localStorage.getItem("userData")) || null,
+  signupData: null,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    signup: (state, action) => {},
+    signup: (state, action) => {
+      state.signupData = action?.payload
+    },
     login: (state, action) => {
       (state.isLoggedIn = true), (state.userData = action?.payload);
 
