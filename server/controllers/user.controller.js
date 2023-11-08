@@ -122,7 +122,7 @@ const signup = async (req, res, next) => {
   }
 };
 
-// ******SIGNUP CONTROLLER*******
+// ******LOGIN CONTROLLER*******
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -156,8 +156,8 @@ const login = async (req, res, next) => {
     const cookieOptions = {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
-      // secure: true,
-      // sameSite: 'None',
+      secure: true,
+      sameSite: 'None',
     };
     res.cookie("token", token, cookieOptions);
 
@@ -205,8 +205,8 @@ const logout = async (req, res, next)=>{
     res.cookie('token', null, {
         httpOnly: true,
         maxAge: 0,
-        // secure: true,
-        // sameSite: 'None',
+        secure: true,
+        sameSite: 'None',
     })
 
     return res.status(200).json({
