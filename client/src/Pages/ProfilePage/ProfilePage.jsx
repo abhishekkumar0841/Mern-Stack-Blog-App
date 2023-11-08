@@ -9,8 +9,8 @@ const ProfilePage = () => {
 
   return (
     <HomeLayout>
-      <div className=" flex items-center justify-center min-h-[80vh]">
-        <div className=" min-w-[800px] shadow-[0_0_10px_black] rounded-md mx-auto transition-all duration-300 ease-in-out text-gray-900 dark:text-white flex flex-col gap-8 px-8 py-6">
+      <div className=" flex items-center px-2 sm:px-6 justify-center min-h-[80vh]">
+        <div className=" w-full sm:w-[600px] shadow-[0_0_10px_black] rounded-md mx-auto transition-all duration-300 ease-in-out text-gray-900 dark:text-white flex flex-col gap-8 px-8 py-6">
           <div className=" flex gap-2 flex-col items-center justify-center">
             <img
               src={userData?.avatar?.secure_url}
@@ -29,7 +29,7 @@ const ProfilePage = () => {
           </div>
 
           <div className=" flex flex-col gap-2">
-            <div className=" flex items-center justify-between">
+            <div className=" flex flex-col xs:flex-row lg:items-center justify-between">
               <p>
                 First Name :{" "}
                 <span className="font-semibold capitalize dark:text-yellow-400">{userData?.firstName}</span>
@@ -46,9 +46,9 @@ const ProfilePage = () => {
               <p>
                 Username : <span className="font-semibold dark:text-yellow-400">{userData?.userName}</span>
               </p>
-              <div className=" bg-yellow-600 hover:bg-yellow-500 transition-all duration-300 ease-in-out py-1 font-bold text-xl mx-auto rounded-md w-fit mt-4">
+              <div className=" bg-yellow-600 hover:bg-yellow-500 transition-all duration-300 ease-in-out py-1 font-bold text-xl xs:mx-auto rounded-md w-fit mt-4">
                 <Link to={'/myblogs'}>
-                  <p className=" px-6 py-2">
+                  <p className=" px-2 xs:px-6 py-2">
                     Total Posted Blogs : <span>{userData?.blog?.length}</span>
                   </p>
                 </Link>

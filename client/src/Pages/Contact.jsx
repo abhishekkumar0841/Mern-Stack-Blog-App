@@ -44,15 +44,15 @@ const Contact = () => {
 
   return (
     <HomeLayout>
-      <div className=" flex items-center justify-evenly px-10 max-w-[1400px] mx-auto min-h-[80vh] py-10 text-gray-900 dark:text-gray-200">
-        <div className=" w-1/2">
+      <div className=" flex items-center flex-col lg:flex-row gap-10 justify-evenly px-10 max-w-[1400px] mx-auto min-h-[80vh] py-10 text-gray-900 dark:text-gray-200">
+        <div className=" w-full lg:w-1/2">
           <img
             src="https://www.marshalsecurity.ca/wp-content/uploads/2014/02/contactus.jpg"
             alt=""
-            className=" w-auto h-96"
+            className=" w-auto h-96 mx-auto"
           />
         </div>
-        <div className=" shadow-[0_0_10px_black] w-1/2 px-6 py-4 rounded-md">
+        <div className=" shadow-[0_0_10px_black] w-full lg:w-1/2 px-6 py-4 rounded-md">
           <h1 className=" text-4xl font-bold text-center">Contact Us</h1>
           <form onSubmit={handleSubmit} className=" flex flex-col gap-3">
             <div className=" flex flex-col gap-1">

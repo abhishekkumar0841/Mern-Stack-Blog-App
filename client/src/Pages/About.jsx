@@ -5,10 +5,10 @@ import blogLogo from "../assets/images/blogLogo.png";
 const About = () => {
   return (
     <HomeLayout>
-      <div className=" w-[1400px] mx-auto flex items-center justify-center min-h-[80vh] py-10">
+      <div className="mx-auto flex items-center justify-center py-10">
         <div className=" text-gray-900 dark:text-gray-200 flex items-center justify-center flex-col gap-2">
           <img src={blogLogo} alt="" width={200} />
-          <div className="flex items-center justify-center flex-col w-[800px] mx-auto gap-4">
+          <div className="flex items-center justify-center flex-col w-[80vw] text-center mx-auto gap-4">
             <h1 className=" text-4xl font-bold">Blog it...</h1>
             <p className=" font-semibold tracking-wider text-lg">
               Welcome to Blog it, where creativity meets community! We're more

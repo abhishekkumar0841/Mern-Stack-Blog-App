@@ -16,15 +16,12 @@ const HomePage = () => {
             </h1>
           </div>
           <div className="dark:text-gray-200 text-gray-900 flex flex-col items-center justify-center gap-4">
-            <p className=" text-center">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-              similique debitis veniam, numquam ipsam magnam suscipit, et eaque
-              velit molestias minus cumque, at reiciendis nihil eligendi maiores
-              reprehenderit? Praesentium, temporibus?
+            <p className=" text-center font-semibold tracking-widest">
+            "Blogging is not about being perfect; it's about being real. Embrace your imperfections, share your vulnerabilities, and watch the magic happen as you connect with others on a profound level."
             </p>
             <Link to={'/postblog'} className=" bg-yellow-600 hover:bg-yellow-500 transition-all duration-300 ease-in-out py-2 font-bold px-4 rounded-md w-fit flex items-center gap-3 text-2xl">
               <BiPen />
-              Write Your First Blog
+              Write Blogging
             </Link>
           </div>
         </div>

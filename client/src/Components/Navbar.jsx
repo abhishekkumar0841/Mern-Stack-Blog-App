@@ -11,8 +11,6 @@ const Navbar = () => {
   const [sideBar, setSideBar] = useState(false);
   const { theme } = useSelector((state) => state.theme);
   const { isLoggedIn, userData } = useSelector((state) => state.auth);
-  //   console.log("THEME IS-->", theme);
-  // console.log("IS LOGGED IN-->", isLoggedIn);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -166,7 +164,7 @@ const Navbar = () => {
       )}
 
       {sideBar && (
-        <div className=" absolute right-0 lg:hidden  w-full sm:w-[50%] flex flex-col items-center py-8 top-20 bg-gray-300 dark:bg-indigo-950 transition-all duration-300 ease-in-out text-gray-900 dark:text-white">
+        <div className=" absolute right-0 lg:hidden  w-full sm:w-[50%] sm:rounded-bl-[100px] flex flex-col items-center py-8 top-[72px] bg-gray-300 dark:bg-indigo-950 transition-all duration-300 ease-in-out text-gray-900 dark:text-white">
           <ul className=" flex flex-col items-center gap-2 font-bold text-xl">
             <li onClick={handleSideBar}>
               <NavLink
