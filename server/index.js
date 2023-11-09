@@ -15,8 +15,16 @@ const PORT = process.env.PORT || 5005;
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
+
+//it help us to find/decode or parse the query-params etc from encoded url
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: [process.env.FRONTEND_URL],
   credentials: true
 }));
 
