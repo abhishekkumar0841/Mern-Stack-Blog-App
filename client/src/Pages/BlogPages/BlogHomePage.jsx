@@ -12,20 +12,20 @@ const BlogHomePage = () => {
 
   const { blogs } = useSelector((state) => state.blog);
   const { loading } = useSelector((state) => state.loader);
-  console.log("Blogs from state->", blogs);
+  // console.log("Blogs from state->", blogs);
 
   async function fetchBlog() {
     dispatch(setLoading(true));
     try {
       const response = await axiosInstance.get("/blog");
-      console.log("RESPONSE OF BLOGS->", response);
+      // console.log("RESPONSE OF BLOGS->", response);
       if (response?.data?.success) {
         toast.success(response?.data?.message);
         const blog = dispatch(getBlog(response?.data?.blogs));
-        console.log("CHECKING ALL BLOGS", blog);
+        // console.log("CHECKING ALL BLOGS", blog);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.response?.data?.message);
     } finally {
       dispatch(setLoading(false));

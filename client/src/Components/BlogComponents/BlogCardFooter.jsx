@@ -12,14 +12,14 @@ const BlogCardFooter = () => {
   const id = params.id;
 
   const [isLike, setIsLike] = useState(null);
-  console.log("CHECK IS_LIKE STATE:", isLike);
+  // console.log("CHECK IS_LIKE STATE:", isLike);
 
   const { blogById } = useSelector((state) => state.blog);
   const { userData } = useSelector((state) => state.auth);
-  console.log("USER DATA IN BLOG FOOTER:", userData);
+  // console.log("USER DATA IN BLOG FOOTER:", userData);
 
   const blogOfThisUser = userData?.blog?.includes(id);
-  console.log("check blogOfThisUser:", blogOfThisUser);
+  // console.log("check blogOfThisUser:", blogOfThisUser);
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -27,7 +27,7 @@ const BlogCardFooter = () => {
   useEffect(() => {
     (async function () {
       const res = await axiosInstance.get(`/blog/like/user/${id}`);
-      console.log("res of useEffect in footer blog", res.data);
+      // console.log("res of useEffect in footer blog", res.data);
       if (res?.data?.success) {
         setIsLike(res?.data?.isLiked);
         toast.success(res?.data?.message);
@@ -45,12 +45,12 @@ const BlogCardFooter = () => {
         const response2 = await axiosInstance.get(`/blog/${blogById._id}`);
         if (response2?.data?.success) {
           const res = await dispatch(getBlogById(response2?.data?.blog));
-          console.log("res of again blog", res);
+          // console.log("res of again blog", res);
           toast.success(response2?.data?.message);
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.response?.data?.message);
     }
   };
@@ -58,19 +58,19 @@ const BlogCardFooter = () => {
   const fetchRemoveLike = async () => {
     try {
       const response = await axiosInstance.delete(`/blog/like/${blogById._id}`);
-      console.log("response of remove like:", response);
+      // console.log("response of remove like:", response);
       if (response?.data?.success) {
         toast.success(response?.data?.message);
 
         const response2 = await axiosInstance.get(`/blog/${blogById._id}`);
         if (response2?.data?.success) {
           const res = await dispatch(getBlogById(response2?.data?.blog));
-          console.log("res of again blog", res);
+          // console.log("res of again blog", res);
           toast.success(response2?.data?.message);
         }
       }
     } catch (error) {
-      console.log(error?.response?.data?.message);
+      // console.log(error?.response?.data?.message);
     }
   };
 
@@ -79,16 +79,16 @@ const BlogCardFooter = () => {
   }
 
   const handleDelete = async ()=>{
-    console.log('clicked')
+    // console.log('clicked')
     try {
       const response = await axiosInstance.delete(`/blog/${id}`)
-      console.log('res of delete:', response)
+      // console.log('res of delete:', response)
       if(response?.data?.success){
         toast.success(response?.data?.message)
         navigate('/myblogs')
       }
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       toast.error(error?.response?.data?.message)
     }
   }

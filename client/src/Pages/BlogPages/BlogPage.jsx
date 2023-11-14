@@ -11,7 +11,7 @@ import BlogTemplate from "../../Components/BlogComponents/BlogTemplate";
 const BlogPage = () => {
   const params = useParams();
   const id = params.id;
-  console.log("PARAMS->", id);
+  // console.log("PARAMS->", id);
 
   const dispatch = useDispatch();
 
@@ -21,12 +21,12 @@ const BlogPage = () => {
     (async function () {
       dispatch(setLoading(true));
       const response = await axiosInstance.get(`/blog/${id}`);
-      console.log("RESPONSE OF BLOG BY ID->", response);
+      // console.log("RESPONSE OF BLOG BY ID->", response);
       if (response?.data?.success) {
         toast.success(response?.data?.message);
         const { blog } = response?.data;
         const res = await dispatch(getBlogById(blog));
-        console.log("RES OF DISPATCH OF BLOG BY ID->", res);
+        // console.log("RES OF DISPATCH OF BLOG BY ID->", res);
         dispatch(setLoading(false));
       }
     })();

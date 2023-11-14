@@ -18,9 +18,9 @@ const EditBlogPage = () => {
     (async () => {
       try {
         const {data} = await axiosInstance.get(`/blog/${id}`);
-        console.log("get blog in edit blog:", data);
+        // console.log("get blog in edit blog:", data);
         const {title, description, blogContent} = data?.blog
-        console.log("***********" ,title, description, blogContent)
+        // console.log("***********" ,title, description, blogContent)
         if(data?.success){
           setBlogData({
               ...blogData,
@@ -30,7 +30,7 @@ const EditBlogPage = () => {
           })
         }
       } catch (error) {
-        console.log(error)
+        // console.log(error)
         toast.error(error?.response?.data?.message)
       }
     })();
@@ -48,13 +48,13 @@ const EditBlogPage = () => {
     e.preventDefault()
     try {
         const response = await axiosInstance.put(`/blog/${id}`, blogData)
-        console.log('is blog updated??', response)
+        // console.log('is blog updated??', response)
         if(response?.data?.success){
             toast.success(response?.data?.message)
             navigate('/myblogs')
         }
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         toast.error(error?.response?.data?.message)
     }
   }

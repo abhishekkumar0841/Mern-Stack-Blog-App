@@ -6,7 +6,7 @@ import {BsFillArrowLeftCircleFill} from 'react-icons/bs'
 
 const BlogTemplate = () => {
   const { blogById } = useSelector((state) => state.blog);
-  console.log("BLOG BY ID-->", blogById);
+  // console.log("BLOG BY ID-->", blogById);
 
   const navigate = useNavigate()
 

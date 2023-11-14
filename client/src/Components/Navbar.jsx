@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     const res = await axiosInstance.get("/user/logout");
-    console.log("RES OF LOGOUT->", res);
+    // console.log("RES OF LOGOUT->", res);
     if (res?.data?.success) {
       dispatch(logout());
       navigate("/");

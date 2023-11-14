@@ -11,9 +11,9 @@ import { useNavigate } from "react-router-dom";
 const MyBlogPage = () => {
 
     const {myBlog} = useSelector(state=> state.blog)
-    console.log('USER BLOG/ myblog:',myBlog)
+    // console.log('USER BLOG/ myblog:',myBlog)
     const {loading} = useSelector(state => state.loader)
-    console.log('LOADING:', loading)
+    // console.log('LOADING:', loading)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -22,14 +22,14 @@ const MyBlogPage = () => {
             dispatch(setLoading(true))
             try {
                 const response = await axiosInstance.get('/blog/myblog')
-                console.log('RESPONSE OF USER BLOG:', response)
+                // console.log('RESPONSE OF USER BLOG:', response)
                 if(response?.data?.success){
                     toast.success(response?.data?.message)
                     dispatch(setMyBlog(response?.data?.blog))
                     dispatch(setLoading(false))
                 }
             } catch (error) {
-                console.log(error)
+                // console.log(error)
                 toast.error(error?.response?.data?.message)
                 dispatch(setLoading(false))
             }

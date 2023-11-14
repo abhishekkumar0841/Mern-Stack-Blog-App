@@ -24,7 +24,7 @@ const Contact = () => {
     try {
       toast.loading('Wait, sending message...')
       const response = await axiosInstance.post("/others/contact", input);
-      console.log("CONTACT US RESPONSE:", response);
+      // console.log("CONTACT US RESPONSE:", response);
       if (response?.data?.success) {
         setInput({
           fullName: "",
@@ -36,7 +36,7 @@ const Contact = () => {
         toast.success(response?.data?.message);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.response?.data?.message);
       toast.dismiss()
     }

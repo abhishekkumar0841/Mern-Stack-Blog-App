@@ -39,7 +39,7 @@ const PostBlogPage = () => {
         //if error comes setTimeout give the better user experience
       setTimeout(() => {
         toast.dismiss();
-        console.log(error);
+        // console.log(error);
         toast.error(error?.response?.data?.message);
       }, 4000);
     }

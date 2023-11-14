@@ -21,15 +21,15 @@ const CommentPage = () => {
       try {
         dispatch(setLoading(true));
         const response = await axiosInstance.get(`/blog/comment/${id}`);
-        console.log("response of comments:", response);
+        // console.log("response of comments:", response);
         if (response?.data?.success) {
           toast.success(response?.data?.message);
           const res = await dispatch(setComments(response?.data));
-          console.log("dispatch of comment:", res);
+          // console.log("dispatch of comment:", res);
           dispatch(setLoading(false));
         }
       } catch (error) {
-        console.log(error?.response?.data?.message);
+        // console.log(error?.response?.data?.message);
         toast.error(error?.response?.data?.message);
         dispatch(setLoading(false));
       }
@@ -52,7 +52,7 @@ const CommentPage = () => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post(`/blog/comment/${id}`, input);
-      console.log("RESPONSE OF COMMENT POST:", response);
+      // console.log("RESPONSE OF COMMENT POST:", response);
       if (response?.data?.success) {
         toast.success(response?.data?.message);
         setInput({
@@ -61,7 +61,7 @@ const CommentPage = () => {
         await dispatch(setComments(response?.data));
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.response?.data?.message);
     }
   };

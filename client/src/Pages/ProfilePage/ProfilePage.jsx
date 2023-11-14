@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
   const { userData } = useSelector((state) => state.auth);
-  console.log("USER DATA IN PROFILE:", userData);
+  // console.log("USER DATA IN PROFILE:", userData);
 
   return (
     <HomeLayout>

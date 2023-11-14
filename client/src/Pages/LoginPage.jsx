@@ -15,7 +15,7 @@ const LoginPage = () => {
   });
 
   const { signupData } = useSelector((state) => state.auth);
-  console.log("signup data:", signupData);
+  // console.log("signup data:", signupData);
 
   function changeHandler(e) {
     const { name, value } = e.target;
@@ -27,10 +27,10 @@ const LoginPage = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(input);
+    // console.log(input);
     try {
       const response = await axiosInstance.post("/user/login", input);
-      console.log("RESPONSE OF LOGIN->", response);
+      // console.log("RESPONSE OF LOGIN->", response);
       if (response?.data?.success) {
         toast.success(response?.data?.message);
         setInput({
@@ -41,10 +41,10 @@ const LoginPage = () => {
         const user = response?.data?.user;
         const res = dispatch(login(user));
         navigate("/");
-        console.log("DISPATCH OF LOGIN->", res);
+        // console.log("DISPATCH OF LOGIN->", res);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error?.response?.data?.message);
     }
   }
