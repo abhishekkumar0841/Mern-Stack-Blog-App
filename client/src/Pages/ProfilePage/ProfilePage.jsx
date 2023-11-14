@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeLayout from "../../Layout/HomeLayout";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import axiosInstance from "../../Helper/axiosInstance";
 
 const ProfilePage = () => {
-  const { userData } = useSelector((state) => state.auth);
-  // console.log("USER DATA IN PROFILE:", userData);
+
+  const [userData, setUserData] = useState(null)
+
+  useEffect(()=>{
+    (async()=>{
+      const response = await axiosInstance.get('user/profile')
+      console.log('res:', response);
+      if(response?.data?.success){
+        setUserData(response?.data?.user)
+      }
+    })()
+  }, [])
 
   return (
     <HomeLayout>
-      <div className=" flex items-center px-2 sm:px-6 justify-center min-h-[80vh]">
+      <div className=" flex items-center px-2 sm:px-6 justify-center min-h-[90vh]">
         <div className=" w-full sm:w-[600px] shadow-[0_0_10px_black] rounded-md mx-auto transition-all duration-300 ease-in-out text-gray-900 dark:text-white flex flex-col gap-8 px-8 py-6">
           <div className=" flex gap-2 flex-col items-center justify-center">
             <img
