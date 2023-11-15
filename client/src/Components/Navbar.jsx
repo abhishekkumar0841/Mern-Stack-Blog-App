@@ -117,13 +117,13 @@ const Navbar = () => {
           <div className=" text-xl font-bold flex items-center gap-4">
             <NavLink
               to={"/login"}
-              className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
+              className=" hover:text-yellow-500 border-2 border-yellow-500 px-2 py-1 rounded-md transition-all duration-300 ease-in-out "
             >
               Login
             </NavLink>
             <NavLink
               to={"/signup"}
-              className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
+              className=" hover:text-yellow-500 border-2 border-yellow-500 px-2 py-1 rounded-md transition-all duration-300 ease-in-out "
             >
               Sign up
             </NavLink>
@@ -133,7 +133,7 @@ const Navbar = () => {
             <NavLink
               to={"/login"}
               onClick={handleLogout}
-              className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
+              className=" hover:text-yellow-500 border-2 border-yellow-500 px-2 py-1 rounded-md transition-all duration-300 ease-in-out "
             >
               Logout
             </NavLink>
@@ -230,13 +230,13 @@ const Navbar = () => {
               <div className=" text-xl font-bold flex items-center gap-4">
                 <NavLink
                   to={"/login"}
-                  className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
+                  className=" hover:text-yellow-500 border-2 border-yellow-500 px-2 py-1 rounded-md transition-all duration-300 ease-in-out "
                 >
                   Login
                 </NavLink>
                 <NavLink
                   to={"/signup"}
-                  className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
+                  className=" hover:text-yellow-500 border-2 border-yellow-500 px-2 py-1 rounded-md transition-all duration-300 ease-in-out "
                 >
                   Sign up
                 </NavLink>
@@ -246,7 +246,7 @@ const Navbar = () => {
                 <NavLink
                   to={"/login"}
                   onClick={handleLogout}
-                  className=" hover:text-yellow-500 transition-all duration-300 ease-in-out "
+                  className=" hover:text-yellow-500 border-2 border-yellow-500 px-2 py-1 rounded-md transition-all duration-300 ease-in-out "
                 >
                   Logout
                 </NavLink>

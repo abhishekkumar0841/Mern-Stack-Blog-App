@@ -61,10 +61,10 @@ const EditBlogPage = () => {
 
   return (
     <HomeLayout>
-      <div className="flex items-center justify-center min-h-[80vh] text-gray-900 dark:text-gray-200 transition-all duration-300 ease-in-out">
-        <div className="mx-auto py-2 shadow-[0_0_10px_black] w-[60%] dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out">
+      <div className="flex items-center justify-center min-h-[90vh] px-4 text-gray-900 dark:text-gray-200 transition-all duration-300 ease-in-out">
+        <div className="mx-auto py-2 shadow-[0_0_10px_black] px-2 md:px-8 dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out">
             <h1 className=" text-4xl font-bold mt-10 text-center">Edit and update your blog here...</h1>
-            <form className=" px-8 py-3 space-y-4" onSubmit={handleSubmit}>
+            <form className=" px-2 md:px-8 py-3 space-y-4" onSubmit={handleSubmit}>
             <div className=" flex flex-col gap-2">
               <label htmlFor="title" className="block font-semibold text-xl">
                 Title of the Blog :

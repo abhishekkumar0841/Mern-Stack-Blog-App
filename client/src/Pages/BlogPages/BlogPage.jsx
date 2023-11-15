@@ -35,7 +35,7 @@ const BlogPage = () => {
   return (
     <HomeLayout>
         {loading && (
-          <div className=" min-h-[80vh] flex items-center justify-center  ">
+          <div className=" min-h-[90vh] flex items-center justify-center  ">
             <h1 className=" text-4xl dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out">Loading...</h1>
           </div>
         )}

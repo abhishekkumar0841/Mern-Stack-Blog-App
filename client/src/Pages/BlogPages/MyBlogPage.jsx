@@ -38,7 +38,7 @@ const MyBlogPage = () => {
 
   return (
     <HomeLayout>
-      <div className="min-h-[80vh] max-w-[1400px] mx-auto py-10 flex gap-10 flex-wrap justify-center">
+      <div className="min-h-[90vh] max-w-[1400px] mx-auto py-10 px-2 flex gap-10 flex-wrap justify-center">
         {
             loading ? (
                 <div>

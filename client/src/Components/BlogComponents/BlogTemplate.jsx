@@ -11,7 +11,7 @@ const BlogTemplate = () => {
   const navigate = useNavigate()
 
   return (
-    <div className=" min-h-[80vh] flex items-center justify-center ">
+    <div className=" min-h-[90vh] px-2 flex items-center justify-center ">
       <div className="w-full max-w-[800px] mx-auto py-6 dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out shadow-[0_0_10px_gray] my-10 ">
         
         <div className=" relative px-5 py-3">

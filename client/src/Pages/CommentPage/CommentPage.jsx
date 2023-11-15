@@ -15,6 +15,7 @@ const CommentPage = () => {
   const navigate = useNavigate();
   const { loading } = useSelector((state) => state.loader);
   const { comments } = useSelector((state) => state.comment);
+  console.log("COMMENTS:", comments);
 
   useEffect(() => {
     (async () => {
@@ -25,7 +26,7 @@ const CommentPage = () => {
         if (response?.data?.success) {
           toast.success(response?.data?.message);
           const res = await dispatch(setComments(response?.data));
-          // console.log("dispatch of comment:", res);
+          console.log("dispatch of comment:", res);
           dispatch(setLoading(false));
         }
       } catch (error) {
@@ -58,7 +59,8 @@ const CommentPage = () => {
         setInput({
           text: "",
         });
-        await dispatch(setComments(response?.data));
+        const aaa = await dispatch(setComments(response?.data));
+        console.log('aaa:', aaa);
       }
     } catch (error) {
       // console.log(error);
@@ -68,18 +70,18 @@ const CommentPage = () => {
 
   return (
     <HomeLayout>
-      <div className=" flex items-center justify-center min-h-[80vh] dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out">
+      <div className=" flex items-center justify-center min-h-[90vh] dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out px-2">
         {loading ? (
           <h1 className=" text-4xl ">Loading...</h1>
         ) : (
           <div className="w-full max-w-[1000px] mx-auto p-6 dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out shadow-[0_0_10px_gray] my-10 flex flex-col items-center gap-4">
             <div className=" relative w-full">
               <h1 className=" text-4xl font-bold text-center tracking-widest">
-                Comments of This blog
+                Comments of this blog
               </h1>
               <BsFillArrowLeftCircleFill
                 onClick={() => navigate(-1)}
-                className=" text-4xl cursor-pointer absolute left-0 top-1"
+                className=" text-4xl cursor-pointer absolute left-0 top-1 hidden sm:block"
               />
             </div>
             <form
@@ -105,13 +107,15 @@ const CommentPage = () => {
               {comments.length > 0 ? (
                 comments.map((comment) => (
                   <React.Fragment key={comment?._id}>
-                    <li className=" text-lg mb-1 font-semibold tracking-normal flex items-center px-10 gap-5">
-                      <p>{comment.text}</p>
-                    </li>
                     <h1 className="flex items-center gap-3 font-bold capitalize">
-                      <BiComment />
+                      <img src={comment?.author?.avatar?.secure_url} alt="" width={40} className=" rounded-full" />
                       {comment?.author?.firstName} {comment?.author?.lastName}{" "}
                     </h1>
+
+                    <li className=" text-lg mb-1 font-semibold tracking-normal flex items-center px-10 gap-5">
+                    <BiComment /><p>{comment.text}</p>
+                    </li>
+
                     <div className=" w-full h-[2px] bg-gray-300 dark:bg-gray-700 mb-2"></div>
                   </React.Fragment>
                 ))
