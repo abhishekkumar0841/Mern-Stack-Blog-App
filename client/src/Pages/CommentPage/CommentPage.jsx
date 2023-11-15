@@ -15,7 +15,7 @@ const CommentPage = () => {
   const navigate = useNavigate();
   const { loading } = useSelector((state) => state.loader);
   const { comments } = useSelector((state) => state.comment);
-  console.log("COMMENTS:", comments);
+  // console.log("COMMENTS:", comments);
 
   useEffect(() => {
     (async () => {
@@ -26,7 +26,7 @@ const CommentPage = () => {
         if (response?.data?.success) {
           toast.success(response?.data?.message);
           const res = await dispatch(setComments(response?.data));
-          console.log("dispatch of comment:", res);
+          // console.log("dispatch of comment:", res);
           dispatch(setLoading(false));
         }
       } catch (error) {

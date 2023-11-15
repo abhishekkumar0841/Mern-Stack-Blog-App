@@ -10,7 +10,7 @@ const ProfilePage = () => {
   useEffect(()=>{
     (async()=>{
       const response = await axiosInstance.get('user/profile')
-      console.log('res:', response);
+      // console.log('res:', response);
       if(response?.data?.success){
         setUserData(response?.data?.user)
       }

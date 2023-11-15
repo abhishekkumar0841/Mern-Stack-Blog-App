@@ -5,8 +5,13 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { login, signup } from "../redux/slice/authSlice";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const changePassType = () => {
+    setShowPassword(!showPassword);
+  };
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [input, setInput] = useState({
@@ -55,7 +60,7 @@ const LoginPage = () => {
 
   return (
     <HomeLayout>
-      <div className="relative min-h-[80vh] flex items-center justify-center dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out">
+      <div className="relative min-h-[80vh] flex items-center justify-center dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out px-2">
         {signupData && (
           <div className=" text-black absolute top-2 text-2xl font-bold tracking-widest bg-green-400 px-4 py-2 rounded-md transition-all duration-500 ease-in-out">
             Congrats{" "}
@@ -82,12 +87,12 @@ const LoginPage = () => {
               className=" bg-transparent border border-gray-900 dark:border-gray-200 px-2 py-1 w-full rounded-sm "
             />
           </div>
-          <div>
+          <div className="relative">
             <label htmlFor="password" className=" block">
               Password:
             </label>
             <input
-              type="text"
+              type={!showPassword ? "password" : "text"}
               id="password"
               name="password"
               placeholder="Enter your password"
@@ -95,6 +100,17 @@ const LoginPage = () => {
               onChange={changeHandler}
               className=" bg-transparent border border-gray-900 dark:border-gray-200 px-2 py-1 w-full rounded-sm"
             />
+            {showPassword ? (
+              <FaEye
+                className="absolute right-4 top-8 text-xl cursor-pointer"
+                onClick={changePassType}
+              />
+            ) : (
+              <FaEyeSlash
+                className="absolute right-4 top-8 text-xl cursor-pointer"
+                onClick={changePassType}
+              />
+            )}
           </div>
           <button
             type="submit"
