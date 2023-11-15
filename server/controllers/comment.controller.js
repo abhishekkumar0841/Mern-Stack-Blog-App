@@ -37,7 +37,7 @@ const createComment = async (req, res) => {
       path: 'comments',
       populate: {
         path: 'author',
-        select: 'firstName lastName'
+        select: 'firstName lastName avatar'
       }
     }).exec()
 
@@ -71,7 +71,7 @@ const allComments = async (req, res)=>{
       path: 'comments',
       populate:{
         path: 'author',
-        select: 'firstName lastName'
+        select: 'firstName lastName avatar'
       }
     }).exec()
 
