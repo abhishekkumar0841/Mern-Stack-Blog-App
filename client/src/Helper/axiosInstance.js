@@ -1,10 +1,11 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_APP_SERVER_BASE_URL
+// const SERVER_BASE_URL = "http://localhost:4005/api/v1";
+const SERVER_BASE_URL = 'https://blog-app-server-vj9d.onrender.com/api/v1'
 
 const axiosInstance = axios.create();
 
-axiosInstance.defaults.baseURL = BASE_URL;
+axiosInstance.defaults.baseURL = SERVER_BASE_URL;
 
 axiosInstance.defaults.withCredentials = true;
 
