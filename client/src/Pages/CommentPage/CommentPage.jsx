@@ -63,7 +63,7 @@ const CommentPage = () => {
           text: "",
         });
         const aaa = await dispatch(setComments(response?.data));
-        console.log("aaa:", aaa);
+        // console.log("aaa:", aaa);
       }
     } catch (error) {
       // console.log(error);
