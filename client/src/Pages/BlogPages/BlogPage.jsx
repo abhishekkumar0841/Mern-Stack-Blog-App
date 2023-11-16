@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { getBlogById } from "../../redux/slice/blogSlice";
 import { setLoading } from "../../redux/slice/loadingSlice";
 import BlogTemplate from "../../Components/BlogComponents/BlogTemplate";
+import Loader from "../../Components/Loader";
 
 const BlogPage = () => {
   const params = useParams();
@@ -36,7 +37,9 @@ const BlogPage = () => {
     <HomeLayout>
         {loading && (
           <div className=" min-h-[90vh] flex items-center justify-center  ">
-            <h1 className=" text-4xl dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out">Loading...</h1>
+            <div>
+              <Loader/>
+            </div>
           </div>
         )}
         <BlogTemplate />

@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { setMyBlog } from "../../redux/slice/blogSlice";
 import { setLoading } from "../../redux/slice/loadingSlice";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../Components/Loader";
 
 const MyBlogPage = () => {
   const { myBlog } = useSelector((state) => state.blog);
@@ -40,9 +41,9 @@ const MyBlogPage = () => {
       <div className="min-h-[90vh] max-w-[1400px] mx-auto py-10 px-2 flex gap-10 flex-wrap justify-center">
         {loading ? (
           <div>
-            <h1 className=" text-4xl text-white font-bold tracking-widest">
-              Loading...
-            </h1>
+            <div>
+              <Loader/>
+            </div>
           </div>
         ) : myBlog.length < 1 ? (
           <div className=" flex flex-col items-center justify-center">

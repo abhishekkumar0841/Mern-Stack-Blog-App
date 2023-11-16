@@ -6,6 +6,7 @@ import { getBlog } from "../../redux/slice/blogSlice";
 import { toast } from "react-hot-toast";
 import { setLoading } from "../../redux/slice/loadingSlice";
 import BlogCard from "../../Components/BlogComponents/BlogCard";
+import Loader from "../../Components/Loader";
 
 const BlogHomePage = () => {
   const dispatch = useDispatch();
@@ -41,9 +42,9 @@ const BlogHomePage = () => {
       <div className="min-h-[90vh] max-w-[1400px] mx-auto py-10 px-2 flex gap-10 flex-wrap justify-center">
         {loading ? (
           <div className=" min-h-[80vh] max-w-[1400px] mx-auto py-10 flex items-center justify-center">
-            <h1 className=" text-4xl font-bold tracking-widest dark:text-gray-200 text-red-900">
-              Loading...
-            </h1>
+            <div>
+              <Loader/>
+            </div>
           </div>
         ) : blogs.length > 0 ? (
           blogs.map((blog) => <BlogCard key={blog._id} blog={blog} />)
