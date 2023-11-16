@@ -20,12 +20,11 @@ const PostBlogPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    toast.loading("Wait! Blog is posting...");
+    toast.loading("Wait! posting your blog...");
     try {
       const response = await axiosInstance.post("/blog/post", input);
       if (response?.data?.success) {
         //settimeout is use to show the loader for at least 2000 sec, it gives good user experience
-        setTimeout(() => {
           toast.dismiss(); //it dismiss the toast.loading()
           toast.success(response?.data?.message);
           setInput({
@@ -33,15 +32,12 @@ const PostBlogPage = () => {
             description: "",
             blogContent: "",
           });
-        }, 2000);
       }
     } catch (error) {
         //if error comes setTimeout give the better user experience
-      setTimeout(() => {
         toast.dismiss();
         // console.log(error);
         toast.error(error?.response?.data?.message);
-      }, 4000);
     }
   };
 

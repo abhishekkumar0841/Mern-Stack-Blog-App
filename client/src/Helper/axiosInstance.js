@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const SERVER_BASE_URL = "http://localhost:4005/api/v1";
-// const SERVER_BASE_URL = 'https://blog-app-server-vj9d.onrender.com/api/v1'
+// const SERVER_BASE_URL = "http://localhost:4005/api/v1";
+const SERVER_BASE_URL = 'https://blog-app-server-vj9d.onrender.com/api/v1'
 
 const axiosInstance = axios.create();
 

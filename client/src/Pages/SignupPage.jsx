@@ -32,10 +32,12 @@ const SignupPage = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     // console.log(input);
+    toast.loading('Wait, your account creating')
     try {
       const response = await axiosInstance.post("/user/signup", input);
       // console.log('RESPONSE OF SIGNUP->', response)
       if (response?.data?.success) {
+        toast.dismiss()
         toast.success("Registration successful");
         setInput({
           firstName: "",
@@ -49,6 +51,7 @@ const SignupPage = () => {
       }
     } catch (error) {
       // console.log(error)
+      toast.dismiss()
       toast.error(error?.response?.data?.message);
     }
   }

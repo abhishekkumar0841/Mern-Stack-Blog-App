@@ -33,10 +33,12 @@ const LoginPage = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     // console.log(input);
+    toast.loading("Wait...")
     try {
       const response = await axiosInstance.post("/user/login", input);
       // console.log("RESPONSE OF LOGIN->", response);
       if (response?.data?.success) {
+        toast.dismiss()
         toast.success(response?.data?.message);
         setInput({
           email: "",
@@ -50,6 +52,7 @@ const LoginPage = () => {
       }
     } catch (error) {
       // console.log(error);
+      toast.dismiss()
       toast.error(error?.response?.data?.message);
     }
   }

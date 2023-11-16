@@ -52,10 +52,12 @@ const CommentPage = () => {
 
   const handleComment = async (e) => {
     e.preventDefault();
+    toast.loading("Wait, posting comment...");
     try {
       const response = await axiosInstance.post(`/blog/comment/${id}`, input);
       // console.log("RESPONSE OF COMMENT POST:", response);
       if (response?.data?.success) {
+        toast.dismiss();
         toast.success(response?.data?.message);
         setInput({
           text: "",
@@ -65,6 +67,7 @@ const CommentPage = () => {
       }
     } catch (error) {
       // console.log(error);
+      toast.dismiss();
       toast.error(error?.response?.data?.message);
     }
   };
@@ -91,14 +94,14 @@ const CommentPage = () => {
               onSubmit={handleComment}
               className="flex flex-col w-full items-center gap-2"
             >
-              <textarea
+              <input
                 className=" rounded-md w-full h-16 resize-none px-4 py-2 overflow-y-scroll bg-transparent border border-gray-900 dark:border-gray-200"
                 name="text"
                 id="comment"
                 value={input.text}
                 onChange={handleChange}
                 placeholder="Write your comment here..."
-              ></textarea>
+              />
               <button
                 type="submit"
                 className=" rounded-sm flex items-center w-fit bg-yellow-600 hover:bg-yellow-500 transition-all duration-300 ease-in-out px-3 gap-2 py-1 font-bold text-xl"
