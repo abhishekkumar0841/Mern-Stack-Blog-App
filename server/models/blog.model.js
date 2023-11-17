@@ -14,14 +14,14 @@ const blogSchema = new mongoose.Schema(
       required: [true, "Description is required"],
       trim: true,
       minLength: [3, "Title should be greater than 3 characters"],
-      maxLength: [60, "Title should not be greater than 30 characters"],
+      maxLength: [60, "Title should not be greater than 60 characters"],
     },
     blogContent: {
       type: String,
       required: [true, "Blog Content is required"],
       trim: true,
-      minLength: [10, "Blog content should be greater than 10 characters"],
-      maxLength: [1200, "Blog content should not be greater than 1200 characters"],
+      minLength: [60, "Blog content should be greater than 60 characters"],
+      maxLength: [15000, "Blog content should not be greater than 15000 characters"],
     },
     blogImage: {
       secure_url: {
