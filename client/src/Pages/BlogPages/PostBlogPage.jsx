@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import HomeLayout from "../../Layout/HomeLayout";
 import axiosInstance from "../../Helper/axiosInstance";
 import toast from "react-hot-toast";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const PostBlogPage = () => {
   const [input, setInput] = useState({
@@ -9,6 +11,8 @@ const PostBlogPage = () => {
     description: "",
     blogContent: "",
   });
+
+  const [value, setValue] = useState("");
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -22,22 +26,24 @@ const PostBlogPage = () => {
     e.preventDefault();
     toast.loading("Wait! posting your blog...");
     try {
-      const response = await axiosInstance.post("/blog/post", input);
+      const response = await axiosInstance.post("/blog/post", {
+        ...input,
+        blogContent: value,
+      });
       if (response?.data?.success) {
-        //settimeout is use to show the loader for at least 2000 sec, it gives good user experience
-          toast.dismiss(); //it dismiss the toast.loading()
-          toast.success(response?.data?.message);
-          setInput({
-            title: "",
-            description: "",
-            blogContent: "",
-          });
+        toast.dismiss(); //it dismiss the toast.loading()
+        toast.success(response?.data?.message);
+        setInput({
+          title: "",
+          description: "",
+          blogContent: "",
+        });
+        setValue("");
       }
     } catch (error) {
-        //if error comes setTimeout give the better user experience
-        toast.dismiss();
-        // console.log(error);
-        toast.error(error?.response?.data?.message);
+      toast.dismiss();
+      // console.log(error);
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -89,15 +95,7 @@ const PostBlogPage = () => {
               >
                 Content of the Blog :
               </label>
-              <textarea
-                className=" resize-none overflow-y-scroll w-full bg-transparent px-4 py-1 border dark:border-gray-200 border-gray-900 rounded-sm h-32"
-                type="text"
-                id="blogContent"
-                name="blogContent"
-                placeholder="Enter Your Blog Content"
-                value={input.blogContent}
-                onChange={changeHandler}
-              />
+              <ReactQuill value={value} onChange={setValue} />
             </div>
             <button
               type="submit"

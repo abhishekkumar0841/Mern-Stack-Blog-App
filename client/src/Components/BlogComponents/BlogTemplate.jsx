@@ -41,7 +41,7 @@ const BlogTemplate = () => {
         {/* description & content section */}
         <div className=" px-5 py-3 text-center space-y-4 text-xl">
           <p className="font-bold">{blogById?.description}</p>
-          <p>{blogById?.blogContent}</p>
+          <p dangerouslySetInnerHTML={{ __html: blogById?.blogContent }} />
         </div>
 
         {/* Blog card footer */}
