@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import blogRoutes from "./routes/blog.routes.js";
 import cors from "cors";
 import otherRoutes from "./routes/others.routes.js";
+import cloudinaryConnection from "./config/cloudinaryConnection.js";
 
 dotenv.config();
 const app = express();
@@ -48,5 +49,6 @@ app.all("*", (req, res) => {
 
 app.listen(PORT, async () => {
   await dbConnection();
+  await cloudinaryConnection()
   console.log(`Server is up and running on http://localhost:${PORT}`);
 });

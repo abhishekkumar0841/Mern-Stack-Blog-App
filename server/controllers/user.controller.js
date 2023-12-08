@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import cloudinary from "cloudinary";
+import fs from "fs/promises";
 
 // ******SIGNUP CONTROLLER*******
 const signup = async (req, res, next) => {
