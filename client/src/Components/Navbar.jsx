@@ -39,7 +39,7 @@ const Navbar = () => {
   return (
     <div className=" w-full h-[10vh] sticky top-0 flex items-center justify-between bg-gray-300 dark:bg-indigo-950 transition-all duration-300 ease-in-out text-gray-900 dark:text-white px-10 py-4 z-50">
       {/* logo */}
-      <div className="flex items-center">
+      <div className="flex items-center  flex-1">
         <Link to={"/"} className="flex items-center gap-2">
           <img
             src={blogLogo}
@@ -52,7 +52,7 @@ const Navbar = () => {
       </div>
 
       {/* links */}
-      <ul className=" hidden lg:flex gap-6 font-bold text-xl">
+      <ul className=" hidden lg:flex gap-6 font-bold text-xl  flex-2">
         <li>
           <NavLink
             to={"/"}
@@ -98,7 +98,7 @@ const Navbar = () => {
       </ul>
 
       {/* other icons */}
-      <div className="hidden lg:flex items-center gap-4">
+      <div className="hidden lg:flex items-center gap-4  flex-1 justify-end">
         <div>
           {!theme ? (
             <BiMoon
