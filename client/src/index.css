@@ -7,3 +7,9 @@
     /* @apply block py-2 pl-3 pr-4 text-white bg-orange-700 rounded md:bg-transparent md:text-orange-700 md:p-0 underline; */
     @apply text-yellow-500
 }
+
+/* styling of react quill element */
+.ql-editor{
+    min-height: 200px;
+    font-size: 20px;
+}

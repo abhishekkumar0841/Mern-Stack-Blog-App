@@ -50,7 +50,7 @@ const PostBlogPage = () => {
   return (
     <HomeLayout>
       <div className=" flex items-center justify-center min-h-[90vh] max-w-[1440px] mx-auto">
-        <div className=" mx-auto py-5 shadow-[0_0_10px_black] w-[90%] md:w-[60%] dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out">
+        <div className=" mx-auto py-5 shadow-[0_0_10px_black] w-[90%] md:w-[60%] dark:text-gray-200 text-gray-900 transition-all duration-300 ease-in-out mt-10">
           <h1 className=" text-2xl text-center font-bold mb-2">
             Write your blog here, and post it...
           </h1>
