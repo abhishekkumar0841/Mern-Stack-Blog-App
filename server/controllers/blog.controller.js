@@ -1,9 +1,25 @@
 import Blog from "../models/blog.model.js";
 import User from "../models/user.model.js";
+import fs from "fs/promises";
+import cloudinary from "cloudinary";
 
 const createBlog = async (req, res) => {
   const { title, description, blogContent } = req.body;
-  if (!title || !description || !blogContent) {
+
+  // console.log("Request file-->", req.file);
+
+  if (!req.file) {
+    return res.status(404).json({
+      success: false,
+      message: "Blog image is also required",
+    });
+  }
+
+  const blogImage  = req.file.path;
+
+  // console.log("Check BLOG_IMAGE_URL IN BLOG CONTROLLER:", blogImage);
+
+  if (!title || !description || !blogContent || !blogImage ) {
     return res.status(404).json({
       success: false,
       message: "All fields are required",
@@ -24,8 +40,35 @@ const createBlog = async (req, res) => {
       title,
       description,
       blogContent,
+      blogImage: userId,
       author: userId,
     });
+
+    if (req.file) {
+      try {
+        const result = await cloudinary.v2.uploader.upload(req.file.path, {
+          folder: "BLOG_APP",
+          width: 550,
+          height: 550,
+          gravity: "faces",
+          crop: "fill",
+        });
+
+        //after getting result modify the user.avatar.public_id to result.public_id
+        if (result) {
+          blog.blogImage = result.secure_url;
+
+          //removing file from server after uploaded on cloudinary
+          fs.rm(`uploads/${req.file.filename}`);
+        }
+      } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+          success: false,
+          message: error,
+        });
+      }
+    }
 
     const savedBlog = await blog.save();
 
@@ -185,7 +228,7 @@ const userBlog = async (req, res) => {
       });
     }
 
-    const blog = await Blog.find({ author: userId }).populate('author').exec();
+    const blog = await Blog.find({ author: userId }).populate("author").exec();
 
     return res.status(200).json({
       success: true,

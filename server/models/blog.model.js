@@ -21,15 +21,13 @@ const blogSchema = new mongoose.Schema(
       required: [true, "Blog Content is required"],
       trim: true,
       minLength: [60, "Blog content should be greater than 60 characters"],
-      maxLength: [15000, "Blog content should not be greater than 15000 characters"],
+      maxLength: [
+        15000,
+        "Blog content should not be greater than 15000 characters",
+      ],
     },
     blogImage: {
-      secure_url: {
-        type: String,
-      },
-      public_id: {
-        type: String,
-      },
+      type: String,
     },
     likes: [
       {
@@ -46,7 +44,7 @@ const blogSchema = new mongoose.Schema(
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: [true, "Author of this blog is required"]
+      required: [true, "Author of this blog is required"],
     },
   },
   {
