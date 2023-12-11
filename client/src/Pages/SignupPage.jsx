@@ -51,7 +51,7 @@ const SignupPage = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("Check input-->", input);
+    // console.log("Check input-->", input);
     toast.loading("Wait, your account creating");
 
     const formData = new FormData();

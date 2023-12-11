@@ -4,15 +4,36 @@ import axiosInstance from "../../Helper/axiosInstance";
 import toast from "react-hot-toast";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { BiPhotoAlbum } from "react-icons/bi";
 
 const PostBlogPage = () => {
   const [input, setInput] = useState({
+    blogImage: "",
     title: "",
     description: "",
     blogContent: "",
   });
 
   const [value, setValue] = useState("");
+  const [blogImage, setBlogImage] = useState("");
+
+  const getImage = (e) => {
+    const uploadedBlogImage = e.target.files[0];
+    // console.log("Uploaded blog img", uploadedBlogImage);
+
+    if (uploadedBlogImage) {
+      setInput({
+        ...input,
+        blogImage: uploadedBlogImage,
+      });
+
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(uploadedBlogImage);
+      fileReader.addEventListener("load", function () {
+        setBlogImage(this.result);
+      });
+    }
+  };
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -25,11 +46,15 @@ const PostBlogPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     toast.loading("Wait! posting your blog...");
+
+    const formData = new FormData();
+    formData.append("blogImage", input.blogImage);
+    formData.append("title", input.title);
+    formData.append("description", input.description);
+    formData.append("blogContent", value);
+
     try {
-      const response = await axiosInstance.post("/blog/post", {
-        ...input,
-        blogContent: value,
-      });
+      const response = await axiosInstance.post("/blog/post", formData);
       if (response?.data?.success) {
         toast.dismiss(); //it dismiss the toast.loading()
         toast.success(response?.data?.message);
@@ -37,8 +62,10 @@ const PostBlogPage = () => {
           title: "",
           description: "",
           blogContent: "",
+          blogImage: "",
         });
         setValue("");
+        setBlogImage("");
       }
     } catch (error) {
       toast.dismiss();
@@ -55,6 +82,31 @@ const PostBlogPage = () => {
             Write your blog here, and post it...
           </h1>
           <form className=" px-8 py-6 space-y-4" onSubmit={handleSubmit}>
+            <div className=" flex flex-col gap-2 shadow-[0_0_10px_blue] items-center rounded-xl">
+              <label
+                htmlFor="blogImage"
+                className="block font-semibold text-xl cursor-pointer"
+              >
+                {blogImage ? (
+                  <img
+                    src={blogImage}
+                    alt="Blog Image"
+                    className=" h-40 w-52 text-blue-700"
+                  />
+                ) : (
+                  <BiPhotoAlbum className=" h-40 w-52 text-blue-700" />
+                )}
+              </label>
+              <input
+                className=" w-full bg-transparent px-4 py-1 border dark:border-gray-200 border-gray-900 rounded-sm hidden"
+                type="file"
+                id="blogImage"
+                name="blogImage"
+                onChange={getImage}
+                accept=".jpg, .jpeg, .png, .svg"
+              />
+            </div>
+
             <div className=" flex flex-col gap-2">
               <label htmlFor="title" className="block font-semibold text-xl">
                 Title of the Blog :
