@@ -5,6 +5,7 @@ import { BiSolidComment, BiSolidLike } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 
 const BlogCard = ({ blog }) => {
+  const { blogImage } = blog;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleCardClick = () => {
@@ -19,11 +20,17 @@ const BlogCard = ({ blog }) => {
         <h1 className=" text-center text-2xl font-bold">{blog?.title}</h1>
       </div>
       <div>
-        <img src={blogLogo} alt="Blog Image" width={100} />
+        <img
+          src={blogImage ? blogImage : blogLogo}
+          className=" rounded-lg "
+          alt="Blog Image"
+          width={100}
+        />
       </div>
       <div>
         <h2 className=" text-center text-lg font-semibold">
-          <span>Short Description : </span>{blog?.description}
+          <span>Short Description : </span>
+          {blog?.description}
         </h2>
       </div>
 
