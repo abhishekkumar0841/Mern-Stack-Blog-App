@@ -1,109 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BiCommentAdd, BiEdit, BiTrash } from "react-icons/bi";
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import axiosInstance from "../../Helper/axiosInstance";
-import { toast } from "react-hot-toast";
-import { getBlogById } from "../../redux/slice/blogSlice";
+
+import useProfile from "../../hooks/useProfile";
+import { Link } from "react-router-dom";
+import useBlogCardFooter from "../../hooks/useBlogCardFooter";
 
 const BlogCardFooter = () => {
-  const params = useParams();
-  const id = params.id;
+  const [
+    isLike,
+    fetchLike,
+    fetchRemoveLike,
+    blogById,
+    id,
+    handleEdit,
+    handleDelete,
+  ] = useBlogCardFooter();
 
-  const [isLike, setIsLike] = useState(null);
-  // console.log("CHECK IS_LIKE STATE:", isLike);
-
-  const { blogById } = useSelector((state) => state.blog);
-  const { userData } = useSelector((state) => state.auth);
-  // console.log("USER DATA IN BLOG FOOTER:", userData);
+  const [userData] = useProfile();
+  // console.log("User data---", userData);
 
   const blogOfThisUser = userData?.blog?.includes(id);
   // console.log("check blogOfThisUser:", blogOfThisUser);
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    (async function () {
-      const res = await axiosInstance.get(`/blog/like/user/${id}`);
-      // console.log("res of useEffect in footer blog", res.data);
-      if (res?.data?.success) {
-        setIsLike(res?.data?.isLiked);
-        toast.success(res?.data?.message);
-      }
-    })();
-  }, [blogById]);
-
-  const fetchLike = async () => {
-    toast.loading("Liking Blog");
-    try {
-      const response = await axiosInstance.post(`/blog/like/${blogById?._id}`);
-      if (response?.data?.success) {
-        toast.dismiss();
-        toast.success(response?.data?.message);
-
-        //fetch blogById here again for updating again in blogById state
-        const response2 = await axiosInstance.get(`/blog/${blogById._id}`);
-        if (response2?.data?.success) {
-          const res = await dispatch(getBlogById(response2?.data?.blog));
-          // console.log("res of again blog", res);
-          toast.success(response2?.data?.message);
-        }
-      }
-    } catch (error) {
-      toast.dismiss();
-      // console.log(error);
-      toast.error(error?.response?.data?.message);
-    }
-  };
-
-  const fetchRemoveLike = async () => {
-    toast.loading("Removing like..");
-    try {
-      const response = await axiosInstance.delete(`/blog/like/${blogById._id}`);
-      // console.log("response of remove like:", response);
-      if (response?.data?.success) {
-        toast.dismiss();
-        toast.success(response?.data?.message);
-
-        const response2 = await axiosInstance.get(`/blog/${blogById._id}`);
-        if (response2?.data?.success) {
-          const res = await dispatch(getBlogById(response2?.data?.blog));
-          // console.log("res of again blog", res);
-          toast.success(response2?.data?.message);
-        }
-      }
-    } catch (error) {
-      toast.dismiss();
-      toast.error(error?.response?.data?.message);
-      // console.log(error?.response?.data?.message);
-    }
-  };
-
-  const handleEdit = () => {
-    navigate(`/editblog/${id}`);
-  };
-
-  const handleDelete = async () => {
-    if (window.confirm("Are you want to delete this blog!")) {
-      // console.log('clicked')
-      toast.loading("Wait, blog deleting...");
-      try {
-        const response = await axiosInstance.delete(`/blog/${id}`);
-        // console.log('res of delete:', response)
-        if (response?.data?.success) {
-          toast.dismiss();
-          toast.success(response?.data?.message);
-          navigate("/myblogs");
-        }
-      } catch (error) {
-        toast.dismiss();
-        // console.log(error)
-        toast.error(error?.response?.data?.message);
-      }
-    }
-  };
 
   return (
     <div className="flex justify-between py-3 mt-5 w-[90%] mx-auto shadow-[0_0_10px_black] px-5 flex-wrap">
@@ -127,11 +45,6 @@ const BlogCardFooter = () => {
           {blogById?.likes?.length} likes
         </p>
       </div>
-
-      {/* TODO */}
-      {/* <div>
-        <p>Created At: {new Date(getBlogById?.createdAt)?.toString()}</p>
-      </div> */}
 
       <Link
         to={`/${id}/comments`}

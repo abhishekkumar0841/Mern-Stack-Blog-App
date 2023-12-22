@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HomeLayout from "../../Layout/HomeLayout";
 import { Link } from "react-router-dom";
-import axiosInstance from "../../Helper/axiosInstance";
 import Loader from "../../Components/Loader";
+import useProfile from "../../hooks/useProfile";
 
 const ProfilePage = () => {
-  const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      const response = await axiosInstance.get("user/profile");
-      // console.log('res:', response);
-      if (response?.data?.success) {
-        setUserData(response?.data?.user);
-      }
-    })();
-  }, []);
+  const [userData] = useProfile()
 
   return (
     <HomeLayout>
